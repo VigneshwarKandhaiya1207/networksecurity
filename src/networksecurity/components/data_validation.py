@@ -114,9 +114,9 @@ class DataValidation:
                 logger.info("Writing the Valid data to {}".format(os.path.dirname(self.data_validation_config.valid_train_file_path)))      
                 dir_path=os.path.dirname(self.data_validation_config.valid_train_file_path)
                 create_directories([dir_path])
-                logger.info("Invalid Train path : {}".format(self.data_validation_config.valid_train_file_path))
+                logger.info("Valid Train path : {}".format(self.data_validation_config.valid_train_file_path))
                 train_data_frame.to_csv(self.data_validation_config.valid_train_file_path)
-                logger.info("Invalid Test Path : {}".format(self.data_validation_config.valid_test_file_path))
+                logger.info("Valid Test Path : {}".format(self.data_validation_config.valid_test_file_path))
                 test_data_frame.to_csv(self.data_validation_config.valid_test_file_path)
 
 
