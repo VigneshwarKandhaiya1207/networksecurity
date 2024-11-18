@@ -65,7 +65,7 @@ class DataIngestion:
             logger.info("Train data exported successfully")
             create_directories([os.path.dirname(self.data_ingestion_config.test_file_path)])
             logger.info("Exporting the test data to {}".format(self.data_ingestion_config.test_file_path))
-            test_set.to_csv(self.data_ingestion_config.test_file_path)
+            test_set.to_csv(self.data_ingestion_config.test_file_path,index=False, header=True)
             logger.info("Test data exported successfully")
         except Exception as e:
             raise NetworkSecurityException(e,sys)
