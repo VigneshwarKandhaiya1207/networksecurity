@@ -2,9 +2,10 @@ import os
 import sys
 from src.networksecurity.logger.logger import logger
 from src.networksecurity.exception.exception import NetworkSecurityException
-from src.networksecurity.entity.config_entity import TrainingPipelineConfig,DataIngestionConfig,DataValidationConfig
+from src.networksecurity.entity.config_entity import TrainingPipelineConfig,DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 from src.networksecurity.components.data_ingestion import DataIngestion
 from src.networksecurity.components.data_validation import DataValidation
+from src.networksecurity.components.data_transformation import DataTransformation
 
 if __name__=="__main__":
     logger.info("STAGE <<<<<<<<<<<< Initializing Training Pipeline Config >>>>>>>>>>>>")
@@ -28,9 +29,23 @@ if __name__=="__main__":
 
     logger.info("STAGE <<<<<<<<<<<< Initiating Data Validation Pipeline >>>>>>>>>>>>")
     data_validation=DataValidation(data_ingestion_artifact=data_ingestion_artifact,data_validation_config=data_validation_config)
-    
+
     logger.info("STAGE <<<<<<<<<<<< Initiating the data validation and archiving artifacts >>>>>>>>>>>>")
     data_validation_artifact=data_validation.initiate_data_validation()
     print(data_validation_artifact)
     logger.info("STAGE <<<<<<<<<<<< Data Validation Completed >>>>>>>>>>>>")
 
+    ################################## Data Transformation ##################################
+
+    logger.info("STAGE <<<<<<<<<<<< Initializing the Data Tranformation Config >>>>>>>>>>>>")
+    data_tansformation_config=DataTransformationConfig(training_pipeline_config)
+    logger.info("STAGE <<<<<<<<<<<< Initialized the Data Transformation Config Successfully >>>>>>>>>>>>")
+
+    logger.info("STAGE <<<<<<<<<<<< Initiating Data Transformation Pipeline >>>>>>>>>>>>")
+    data_transformation=DataTransformation(data_validation_artifact=data_validation_artifact,
+                                           data_transformation_config=data_tansformation_config)
+    
+    logger.info("STAGE <<<<<<<<<<<< Initiating the data transformation and collecting transformed data and object >>>>>>>>>>>>")
+    data_transformation_artifact=data_transformation.initiate_data_transformation()
+    print(data_transformation_artifact)
+    logger.info("STAGE <<<<<<<<<<<< Data Transformation Completed >>>>>>>>>>>>")
