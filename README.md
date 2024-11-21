@@ -68,9 +68,9 @@
 
 The final model and the preprocessor object is pushed to the AWS S3 bucket which can be used in the future for model prediction.
 
-### Detailed Infrastructure Architecture
+## Detailed Infrastructure Architecture
 
-*** High-Level CI/CD Pipeline Overview ***
+## High-Level CI/CD Pipeline Overview
 
 ## Trigger GitHub Actions Workflow on Commit:
 
@@ -89,7 +89,7 @@ After building the Docker image, the image is tagged and pushed to the Amazon El
 Once the image is pushed to ECR, the workflow triggers the deployment of the image to an EC2 instance. This deployment is handled by a self-hosted GitHub Actions runner on the EC2 instance.
 The self-hosted runner interacts with the EC2 instance to pull the Docker image from ECR and run the application.
 
-*** To replicate the project in local ***
+### To replicate the project in localS
 
 Step 1: Clone the repository
 
