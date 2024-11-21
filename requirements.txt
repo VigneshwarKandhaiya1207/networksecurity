@@ -10,4 +10,4 @@ awscli
 streamlit
 git
 
--e .
+#-e .
