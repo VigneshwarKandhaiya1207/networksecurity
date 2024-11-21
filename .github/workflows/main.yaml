@@ -1,0 +1,21 @@
+name: networksecurity-workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+permissions:
+  id-tokem: write
+  contents: read
+
+jobs:
+  integration:
+    name: continuous-integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+      - uses: actions/checkout@v4
+
