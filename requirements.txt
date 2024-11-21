@@ -7,5 +7,7 @@ pyyaml
 mlflow
 boto3
 awscli
+streamlit
+git
 
-#-e .
+-e .
