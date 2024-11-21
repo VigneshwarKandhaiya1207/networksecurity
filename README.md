@@ -1,5 +1,23 @@
 # networksecurity
 
+Open sources tools Used:
+
+- Language : Python
+- Experiment Tracking: MLFlow
+- Data Versioning: DVC and DagsHub
+- Code Versioning: Git and GitHub
+- Containerization: Docker
+- Image Registry: Dockerhub and Aws ECR
+- CI/CD Pipeline: GitHub actions
+- Deployment: Amazon EC2
+- Web UI: Streamlit
+- Feature Store: Amazon S3 bucket
+- ETL Pipeline : Airflow
+- Database: MongoDB
+
+ETL Pipeline Repository : https://github.com/VigneshwarKandhaiya1207/s3_mongo_data_pipeline_airflow.git
+
+
 ## Project Architecture
 
 ![alt text](readme_images/ML_project_architecture.png)
