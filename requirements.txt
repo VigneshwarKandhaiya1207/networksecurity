@@ -4,5 +4,8 @@ scikit-learn
 pymongo
 python-dotenv
 pyyaml
+mlflow
+boto3
+awscli
 
 #-e .

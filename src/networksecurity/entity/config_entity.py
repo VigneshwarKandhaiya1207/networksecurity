@@ -9,8 +9,8 @@ class TrainingPipelineConfig:
         self.pipeline_name=training_pipeline.PIPELINE_NAME
         self.artifact_name=training_pipeline.ARTIFACTS_DIR
         self.artifact_dir=os.path.join(self.artifact_name,timestamp)
-        self.model_dir=os.path.join("final_model")
         self.timestamp: str=timestamp
+        self.model_dir:str=training_pipeline.FINAL_MODEL_DIR
 
 class DataIngestionConfig:
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
@@ -54,6 +54,7 @@ class DataTransformationConfig:
         self.transformed_object_file_path:str=os.path.join(self.data_transformation_dir,
                                                            training_pipeline.DATA_TANSFORMATION_TRANSFORMED_OBJECT_DIR,
                                                            training_pipeline.PREPROCESSING_OBJECT_FILE_NAME)
+        self.final_model_dir:str=training_pipeline_config.model_dir
 
 class ModelTrainerConfig:
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
@@ -62,3 +63,4 @@ class ModelTrainerConfig:
                                                       training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
         self.expected_score:float=training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
         self.overfitting_underfitting_threshold=training_pipeline.MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD
+        self.final_model_dir:str=training_pipeline_config.model_dir

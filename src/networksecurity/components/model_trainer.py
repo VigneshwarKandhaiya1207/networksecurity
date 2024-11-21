@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from urllib.parse import urlparse
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
+from src.networksecurity.constants.training_pipeline.training_pipeline import MODEL_FILE_NAME
 from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier,AdaBoostClassifier
 from src.networksecurity.logger.logger import logger
 from src.networksecurity.utils.utils import load_numpy_data_array,evaluate_models,load_object,save_object
@@ -35,30 +36,28 @@ class ModelTrainer:
             precision_score=classificationmetric.precision_score
             recall_score=classificationmetric.recall_score
 
-            
-
             mlflow.log_metric("f1_score",f1_score)
             mlflow.log_metric("precision",precision_score)
             mlflow.log_metric("recall_score",recall_score)
-            #log_model(best_model,"model")
+            log_model(best_model,"model")
             #Model registry does not work with file store
-            if tracking_url_type_store != "file":
+            # if tracking_url_type_store != "file":
 
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-                log_model(best_model, "model", registered_model_name=best_model)
-            else:
-                log_model(best_model, "model")       
+            #     # Register the model
+            #     # There are other ways to use the Model Registry, which depends on the use case,
+            #     # please refer to the doc for more information:
+            #     # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+            #     log_model(best_model, "model", registered_model_name=best_model)
+            # else:
+            #     log_model(best_model, "model")       
         
     def train_model(self,X_train,y_train,X_test,y_test):
         models = {
             "Random Forest": RandomForestClassifier(verbose=1),
-            "Decision Tree": DecisionTreeClassifier(),
-            "Gradient Boosting": GradientBoostingClassifier(verbose=1),
-            "Logistic Regression": LogisticRegression(verbose=1),
-            "AdaBoost": AdaBoostClassifier(),
+            # "Decision Tree": DecisionTreeClassifier(),
+            # "Gradient Boosting": GradientBoostingClassifier(verbose=1),
+            # "Logistic Regression": LogisticRegression(verbose=1),
+            # "AdaBoost": AdaBoostClassifier(),
         }
         params={
             "Decision Tree": {
@@ -114,7 +113,7 @@ class ModelTrainer:
         Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
         save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
         #model pusher
-        save_object("final_model/model.pkl",best_model)
+        save_object(os.path.join(self.model_trainer_config.final_model_dir,MODEL_FILE_NAME),best_model)
 
         
         model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,

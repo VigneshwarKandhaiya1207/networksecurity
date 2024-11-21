@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import KNNImputer
 from src.networksecurity.logger.logger import logger
 from src.networksecurity.exception.exception import NetworkSecurityException
-from src.networksecurity.constants.training_pipeline.training_pipeline import TARGET_COLUMN,DATA_TRANSFORMATION_IMPUTER_PARAMS
+from src.networksecurity.constants.training_pipeline.training_pipeline import TARGET_COLUMN,DATA_TRANSFORMATION_IMPUTER_PARAMS,PREPROCESSING_OBJECT_FILE_NAME
 from src.networksecurity.entity.config_entity import DataTransformationConfig
 from src.networksecurity.entity.artifact_entity import DataValidationArtifact,DataTransformationArtifact
 from src.networksecurity.utils.utils import read_yaml,create_directories,save_numpy_array_data,save_object
@@ -69,7 +69,7 @@ class DataTransformation:
             save_numpy_array_data(self.data_transformation_config.transformed_train_file_path,train_array)
             save_numpy_array_data(self.data_transformation_config.transformed_test_file_path,test_array)
             save_object(self.data_transformation_config.transformed_object_file_path,preprocessor_object)
-            save_object("final_model"/"preprocessor.pkl",preprocessor_object)
+            save_object(os.path.join(self.data_transformation_config.final_model_dir,PREPROCESSING_OBJECT_FILE_NAME),preprocessor_object)
 
 
             data_transformation_artifact=DataTransformationArtifact(transformed_object_file_path=self.data_transformation_config.transformed_object_file_path,

@@ -15,6 +15,7 @@ TEST_FILE_NAME: str="test.csv"
 
 SCHEMA_FILE_PATH=os.path.join("data_schema","schema.yaml")
 SAVED_MODEL_DIR =os.path.join("saved_models")
+FINAL_MODEL_DIR=os.path.join("final_model")
 MODEL_FILE_NAME = "model.pkl"
 
 """
@@ -62,3 +63,7 @@ MODEL_TRAINER_TRAINED_MODEL_DIR:str="trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME:str="model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE:float=0.6
 MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD: float = 0.05
+
+BUCKET_NAME="network-security-artifacts-model"
+S3_BUCKET_ARTIFACTS_DIR="artifacts"
+S3_BUCKET_MODEL_DIR="models"
